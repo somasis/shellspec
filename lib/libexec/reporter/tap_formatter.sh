@@ -15,14 +15,14 @@ tap_begin() {
 
 tap_each() {
   case $field_type in (result)
-    tap '=' "${field_fail:+not }ok $example_count" \
+    tap '=' "${field_fail:+${RED}not }${field_note:-$GREEN}ok $example_count" \
       "- $(field_description)${field_note:+ # }$field_note${LF}"
   esac
 }
 
 tap_end() {
   [ "$aborted" ] || return 0
-  tap '=' "not ok $(($count_examples + 1)) - aborted by unexpected error${LF}"
+  tap '=' "${RED}not ok $(($count_examples + 1)) - aborted by unexpected error${LF}"
 }
 
 tap_output() {
